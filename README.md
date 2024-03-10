@@ -97,7 +97,7 @@ Example response: `{"predicted_categories":["Kitchen","Garden & Pets"]}`
 
 
 ### Production-ready setup
-**Attention**: Performance (request / response cycle) is much larger when using Redis from Docker. We have tried to figure this out but the problem seems to be related to network communication inside Docker. In real cluster, real redis would be used so it would be as fast as local server from above. If you want to test the speed of request / response, feel free to use local installation steps from above otherwise be patient and please know that the performance problems are related to Redis and Docker interaction.
+**Attention**: Performance (request / response cycle) is much larger when using Redis from Docker. We have tried to figure this out but the problem seems to be related to network communication inside Docker. In real cluster, real redis would be used so it would be much faster. If you want to test the speed of request / response, feel free to use local installation steps from above otherwise be patient and please know that the performance problems are related to Redis and Docker interaction.
 
 1. Run `docker-compose up --build`
 
