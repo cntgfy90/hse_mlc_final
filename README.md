@@ -17,7 +17,7 @@ Current project is a final task.
 Problem we are solving is Multi-label classification task based on eCommerce data. The goal is to predict correctly the categories by text (NLP problem). We use BERT-like pre-trained model and transfer learning technique to apply necessary changes on the head of the model to conform to our predicition task.
 
 **Model description**
-BERT-like model from Hugginface (`bert-base-cased`) with tokenizer to solve NLP multi-label classification task. Number of classes is 15 that's reflected in updated head of the model. We use transfer learning approach.
+BERT-like model from Hugginface (`bert-base-cased`) with tokenizer to solve NLP multi-label classification task. Number of classes is 15 that's reflected in updated head of the model. We use transfer learning approach. For evaluation we use `accuracy` metric.
 
 **Dataset**
 eCommerace dataset containing products, categories and sub-categories of different products. Other information is available too but we are mostly interested in `description` and category columns that we are our targets.
@@ -133,6 +133,7 @@ Example response: `{"predicted_categories":["Kitchen","Garden & Pets"]}`
 ### Training / evaluation stats
 
 **Runs dashboard**
+`TES-13` is the best model according the evaluation metrics.
 
 ![runs_dashboard](docs/runs_dashboard.png)
 
