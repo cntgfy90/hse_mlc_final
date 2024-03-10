@@ -3,6 +3,7 @@
 ### Prerequisites
 
 Python 3.10
+
 NeptuneAI API token
 
 ### High-level overview
