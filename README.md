@@ -132,6 +132,10 @@ Example response: `{"predicted_categories":["Kitchen","Garden & Pets"]}`
 
 ### Training / evaluation stats
 
+**Runs dashboard**
+
+![runs_dashboard](docs/runs_dashboard.png)
+
 **Training loss per batch**
 
 ![training_loss](docs/train_batch_loss.png)
