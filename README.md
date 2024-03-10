@@ -129,3 +129,23 @@ curl -X POST http://127.0.0.1:5000/predict -d '{"text":"alongside lovely cartoon
 ```
 
 Example response: `{"predicted_categories":["Kitchen","Garden & Pets"]}`
+
+### Training / evaluation stats
+
+**Training loss per batch**
+
+![training_loss](docs/train_batch_loss.png)
+
+**Training accuracy per batch**
+
+![training_acc](docs/train_batch_acc.png)
+
+**Validation loss**
+Check the left-most part of the image, the pointer there means the loss is ~`0.069`.
+
+![validation_loss](docs/val_loss.png)
+
+**Validation accuracy**
+Check the left-most part of the image, the pointer there means the accuracy is ~`0.976`.
+
+![training_acc](docs/val_acc.png)
