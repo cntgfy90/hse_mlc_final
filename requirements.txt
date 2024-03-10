@@ -1,12 +1,15 @@
+amqp==5.2.0
 anyio==4.3.0
 argon2-cffi==23.1.0
 argon2-cffi-bindings==21.2.0
 arrow==1.3.0
 asttokens==2.4.1
 async-lru==2.0.4
+async-timeout==4.0.3
 attrs==23.2.0
 Babel==2.14.0
 beautifulsoup4==4.12.3
+billiard==4.2.0
 black==24.2.0
 bleach==6.1.0
 blinker==1.7.0
@@ -14,10 +17,14 @@ boto3==1.34.59
 botocore==1.34.59
 bravado==11.0.3
 bravado-core==6.1.1
+celery==5.3.6
 certifi==2024.2.2
 cffi==1.16.0
 charset-normalizer==3.3.2
 click==8.1.7
+click-didyoumean==0.3.0
+click-plugins==1.1.1
+click-repl==0.3.0
 comm==0.2.1
 debugpy==1.8.1
 decorator==5.1.1
@@ -59,6 +66,7 @@ jupyter_server_terminals==0.5.2
 jupyterlab==4.1.4
 jupyterlab_pygments==0.3.0
 jupyterlab_server==2.25.3
+kombu==5.3.5
 MarkupSafe==2.1.5
 matplotlib-inline==0.1.6
 mistune==3.0.2
@@ -111,6 +119,7 @@ python-json-logger==2.0.7
 pytz==2024.1
 PyYAML==6.0.1
 pyzmq==25.1.2
+redis==5.0.2
 referencing==0.33.0
 regex==2023.12.25
 requests==2.31.0
@@ -147,6 +156,7 @@ typing_extensions==4.10.0
 tzdata==2024.1
 uri-template==1.3.0
 urllib3==2.0.7
+vine==5.1.0
 wcwidth==0.2.13
 webcolors==1.13
 webencodings==0.5.1

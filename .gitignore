@@ -9,4 +9,4 @@ pyvenv.cfg
 __pycache__
 temp
 .ipynb_checkpoints
-model_weights.bin
+model_weights*

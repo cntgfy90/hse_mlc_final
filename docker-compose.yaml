@@ -7,6 +7,8 @@ services:
       replicas: 3
     networks:
       - main_network
+    depends_on:
+      - queue
 
   loadbalancer:
     build: ./loadbalancer
@@ -16,6 +18,13 @@ services:
       - main_network
     depends_on:
       - application
+
+  queue:
+    image: redis
+    networks:
+      - main_network
+    ports:
+      - 6379:6379
 
 networks:
   main_network:

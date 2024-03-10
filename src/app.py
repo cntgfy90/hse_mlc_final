@@ -2,12 +2,29 @@ import os
 import torch
 import neptune
 import numpy as np
+import nltk
+
+nltk.download("stopwords")
+nltk.download("wordnet")
+nltk.download("omw-1.4")
+
 from flask import Flask, request
 from bert import MLBERT
 from preprocess import preprocess
 from tokenizer import tokenizer
+from celery import shared_task
+from utils import get_best_run, get_model_weights_name, download_model_weights
+from celery_init_app import celery_init_app
+from config import API_TOKEN, PROJECT_NAME, BROKER_URL
 
 app = Flask(__name__)
+app.config.from_mapping(
+    CELERY=dict(
+        broker_url=BROKER_URL,
+        task_ignore_result=True,
+    ),
+)
+celery_init_app(app)
 
 categories = [
     "Beauty & Hygiene",
@@ -28,35 +45,44 @@ categories = [
 ]
 
 project = neptune.init_project(
-    project="stepangrigorov/test",
+    project=PROJECT_NAME,
     mode="read-only",
-    api_token="<API_TOKEN>",
+    api_token=API_TOKEN,
 )
+
+# On server initialize we are going to download
+# model weights for default value
+default_run_id = download_model_weights(project)
+
+
+@shared_task(ignore_result=True)
+def download_model_weights_task() -> None:
+    download_model_weights(project)
 
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    best_run_id = project.fetch_runs_table(tag="best").to_pandas()["sys/id"][0]
-    best_run = neptune.init_run(
-        project="stepangrigorov/test",
-        mode="read-only",
-        with_id=best_run_id,
-        api_token="<API_TOKEN>",
-    )
+    best_run = get_best_run(project)
+    best_run_id = best_run["sys/id"].fetch()
     best_model_params = best_run["config/parameters"].fetch()
     model = MLBERT(n_classes=best_model_params["num_classes"])
 
-    if not os.path.exists(f"{os.getcwd()}" + "/src/model_weights.bin"):
-        best_run["model/weights"].download(
-            destination=f"{os.getcwd()}" + "/src/model_weights.bin"
-        )
+    download_model_weights_task.delay()
 
-    model.load_state_dict(
-        torch.load(
-            f"{os.getcwd()}" + "/src/model_weights.bin",
-            map_location=torch.device("cpu"),
+    if os.path.exists(f"{os.getcwd()}" + f"/{get_model_weights_name(best_run_id)}"):
+        model.load_state_dict(
+            torch.load(
+                f"{os.getcwd()}" + f"/{get_model_weights_name(best_run_id)}",
+                map_location=torch.device("cpu"),
+            )
         )
-    )
+    else:
+        model.load_state_dict(
+            torch.load(
+                f"{os.getcwd()}" + f"/f{get_model_weights_name(default_run_id)}",
+                map_location=torch.device("cpu"),
+            )
+        )
 
     text = preprocess(request.json["text"])
 
