@@ -2,4 +2,11 @@ bin
 include
 lib
 lib64
+etc
+share
 pyvenv.cfg
+.neptune
+__pycache__
+temp
+.ipynb_checkpoints
+model_weights.bin
