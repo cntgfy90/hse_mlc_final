@@ -17,9 +17,11 @@ Current project is a final task.
 Problem we are solving is Multi-label classification task based on eCommerce data. The goal is to predict correctly the categories by text (NLP problem). We use BERT-like pre-trained model and transfer learning technique to apply necessary changes on the head of the model to conform to our predicition task.
 
 **Model description**
+
 BERT-like model from Hugginface (`bert-base-cased`) with tokenizer to solve NLP multi-label classification task. Number of classes is 15 that's reflected in updated head of the model. We use transfer learning approach. For evaluation we use `accuracy` metric.
 
 **Dataset**
+
 eCommerace dataset containing products, categories and sub-categories of different products. Other information is available too but we are mostly interested in `description` and category columns that we are our targets.
 The dataset can be checked in the Jupyter notebook.
 
@@ -38,6 +40,7 @@ The dataset can be checked in the Jupyter notebook.
 ```
 
 **Runtime architecture**
+
 First step is to train a model in Jupyter notebook (`trainer.ipynb`).
 
 ```bash
